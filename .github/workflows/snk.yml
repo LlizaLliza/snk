@@ -1,22 +1,23 @@
-name: Generate Snake
+name: Generate Pacman Contribution Graph
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # setiap hari
-  workflow_dispatch:
+    - cron: "0 0 * * *"  # jalan setiap hari
+  workflow_dispatch:      # bisa dijalankan manual juga
 
 jobs:
-  generate:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: Platane/snk@v3
+      - name: Generate snake animation
+        uses: Platane/snk@v3
         with:
           github_user_name: LlizaLliza
           outputs: |
             ./output/pacman-contribution-graph.svg
             ./output/pacman-contribution-graph-dark.svg
 
-      - name: Push to output branch
+      - name: Push to the output branch
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: output
